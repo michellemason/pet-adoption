@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  
+    <title>Pet Info & Edit</title>
+</head>
+<body>
+    <div class="container">
+        <h1 class="display-4">{{pet.name}}'s Information</h1>
+   
+        <div class="row">
+            <div class="col-sm-4">
+                <img src="{{pet.image_url()}}" class="img-thumbnail img-fluid" alt="..." class="img-thumbnail">
+            </div>
+        
+        <div class="col-sm-6">
+            <ul class="list-group list-group-flush">    
+                <li class="list-group-item">Name: {{pet.name}}</li>
+                <li class="list-group-item">Species: {{pet.species}}</li>
+                <li class="list-group-item">Age: {{pet.age}}</li>
+                <li class="list-group-item">Notes: {{pet.notes}}</li>
+            </ul>
+        </div>
+    </div>
+        <br>
+        <br>
+        <section>
+        <div class="row mx-auto">
+        <form method="POST">
+            {{form.hidden_tag()}}
+            {% for field in form if field.widget.input_type != 'hidden' %}
+
+            <div class="form-group">
+                    {{field.label}}
+                    {{field(class_="form-control")}}
+                
+                {% for err in field.errors %}
+                <small class="form-text text-danger">{{err}}</small>
+                {% endfor %}
+            {% endfor %}
+            </div>
+
+            </div>
+            <button class="btn btn-success bti-large" type="submit">Update Pet</button>
+            <a href="/" class="btn btn-danger btn-large">Cancel</a>
+    
+
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+              <ul class="flashes">
+                 {% for message in messages %}
+                  <div class="message_flash">{{ message }}</div>
+                 {% endfor %}
+             </ul>
+           {% endif %}
+          {% endwith %}
+
+        </form>
+        </div>
+        </section>
+    </div>
+
+</body>
+</html>

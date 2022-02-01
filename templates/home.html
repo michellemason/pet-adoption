@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  
+    <title>Home Page</title>
+</head>
+<body>
+    <div class="container">
+        <h1 class="display-4">Pets</h1>
+        <div class="row">
+        {% for pet in pets %}
+            <div class="col-4">
+                <img src="{{pet.image_url()}}" alt="..." class="img-thumbnail">
+                <h4><a href="/{{pet.id}}" class="btn btn-info">{{pet.name}}</a></h4>
+                <p>{{pet.notes}}</p>
+                {% if pet.available %}
+                <h5 class="text-uppercase font-weight-bold">Available</h5>
+                {% endif %}
+            </div>
+        {% endfor %}
+        </div>
+        <a class="btn btn-primary" href="/add" role="button">Add Pet</a>
+    </div>
+
+</body>
+</html>
